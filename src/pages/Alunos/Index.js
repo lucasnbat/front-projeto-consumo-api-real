@@ -8,7 +8,7 @@ import axios from '../../services/axios';
 export default function Alunos() {
   React.useEffect(() => {
     async function getData() {
-      const response = await axios.get('192.168.100.200:3001/alunos');
+      const response = await axios.get('http://192.168.100.200:3001/alunos');
       console.log(response);
     }
 
