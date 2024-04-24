@@ -10,3 +10,4 @@
 * npm i redux react-redux
 * npm i redux-saga
 * npm i redux-persist
+* npm i lodash
