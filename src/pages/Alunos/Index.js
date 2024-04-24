@@ -13,7 +13,6 @@ export default function Alunos() {
     async function getData() {
       const response = await axios.get('http://192.168.100.200/alunos');
       setAlunos(response.data);
-      console.log(alunos);
     }
 
     getData();
