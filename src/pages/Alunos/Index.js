@@ -11,7 +11,7 @@ export default function Alunos() {
 
   useEffect(() => {
     async function getData() {
-      const response = await axios.get('http://192.168.100.200/alunos');
+      const response = await axios.get('http://192.168.100.122/alunos');
       setAlunos(response.data);
     }
 
