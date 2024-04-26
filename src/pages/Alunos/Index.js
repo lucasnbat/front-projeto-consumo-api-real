@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 // esse é o cara que dispara as ações
 // as ações mandam o que vai ser feito de alteração
 // elas tem um tipo, payload, igual o que vimos na rocketseat
+import { FaEdit, FaUserCircle, FaWindowClose } from 'react-icons/fa';
+import get from 'lodash';
+import { Link } from 'react-router-dom';
 import { Container } from '../../styles/GlobalStyles';
 import axios from '../../services/axios';
-import { AlunoContainer } from './styled';
+import { AlunoContainer, ProfilePicture } from './styled';
 
 export default function Alunos() {
   const [alunos, setAlunos] = useState([]);
@@ -24,7 +27,24 @@ export default function Alunos() {
       <AlunoContainer>
         {alunos.map((aluno) => (
           <div key={String(aluno.id)}>
-            <img src={aluno.Fotos[0].url} alt="" />
+            <ProfilePicture>
+              {get(aluno, 'Fotos[0].url', false) ? (
+                <FaUserCircle size={36} />
+                // <img src={aluno.Fotos[0].url} alt="" />
+              ) : (
+                <FaUserCircle size={36} />
+              )}
+            </ProfilePicture>
+            <span>{aluno.nome}</span>
+            <span>{aluno.email}</span>
+
+            <Link to={`/aluno/${aluno.id}/edit`}>
+              <FaEdit size={16} />
+            </Link>
+
+            <Link to={`/aluno/${aluno.id}/delete`}>
+              <FaWindowClose size={16} />
+            </Link>
           </div>
         ))}
       </AlunoContainer>
