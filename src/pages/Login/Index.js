@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 // esse é o cara que dispara as ações
 // as ações mandam o que vai ser feito de alteração
 // elas tem um tipo, payload, igual o que vimos na rocketseat
@@ -6,10 +7,12 @@ import { isEmail } from 'validator';
 import { toast } from 'react-toastify';
 import { Container } from '../../styles/GlobalStyles';
 import { Form } from './styled';
+import * as actions from '../../store/modules/auth/actions';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,9 +29,9 @@ export default function Login() {
       toast.error('Senha inválida');
     }
 
-    if (formErrors) return;
+    if (formErrors) return; // se não tem erro, vai disparar o dispatch
 
-    console.log('oi');
+    dispatch(actions.loginRequest({ email, password }));
   };
 
   return (
