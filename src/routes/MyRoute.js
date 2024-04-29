@@ -9,6 +9,9 @@ import PropTypes from 'prop-types';
  * ...rest: Todos os outros parâmetros que o Route aceita
  */
 
+// provavelmente isClosed e isLoggedIn são variaveis que vão ser passadas para o componente
+// por meio do contexto do react (provider que tem o store lá no App.js)
+
 export default function MyRoute({ component: Component, isClosed, ...rest }) {
   const isLoggedIn = false;
 
@@ -25,6 +28,7 @@ export default function MyRoute({ component: Component, isClosed, ...rest }) {
     );
   }
 
+  // todo componente vai possuir essas variaveis isClosed, isLoggedIn para manipular
   // eslint-disable-next-line react/jsx-props-no-spreading
   return <Route {...rest} component={Component} />;
 }

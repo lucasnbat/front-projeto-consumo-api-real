@@ -10,15 +10,14 @@ import axios from '../../../services/axios';
 // função geradora = function*
 function* loginRequest({ payload }) {
   try {
-    // const { email, password } = payload;
     const response = yield call(axios.post, 'http://192.168.100.122/tokens', payload);
-    yield put(actions.loginSucess({ ...response.data }));
+    yield put(actions.loginSucess({ ...response.data })); // volta o token gerado para o user
 
     toast.success('Você fez login');
 
     // definindo o token no header por padrão
-    axios.defaults.headers.Authorization = `Bearer ${response.data.token}`;
-    history.push(payload.prevPath);
+    axios.defaults.headers.Authorization = `Bearer ${response.data.token}`; // token gerado no header
+    history.push(payload.prevPath); // redireciona o usuário para a página que ele estava antes
   } catch (error) {
     toast.error('Usuário ou senha inválidos');
     yield put(actions.loginFailure());

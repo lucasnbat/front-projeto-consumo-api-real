@@ -15,7 +15,7 @@ import * as types from '../types';
  * as actions com as funções que disparam as ações
  */
 
-// estado inicial
+// estado inicial -> é também chamado "estado global da aplicação"
 const initialState = {
   isLoggedIn: false,
   token: false,
