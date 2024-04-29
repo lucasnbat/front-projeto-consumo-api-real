@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 // elas tem um tipo, payload, igual o que vimos na rocketseat
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
+import { get } from 'lodash';
+import history from '../../services/history';
 import { Container } from '../../styles/GlobalStyles';
 import { Form } from './styled';
 import axios from '../../services/axios';
@@ -36,15 +38,19 @@ export default function Register() {
     if (formErrors) return;
 
     try {
-      const response = await axios.post('http://192.168.100.122/users', {
+      await axios.post('http://192.168.100.122/users', {
         nome,
         password,
         email,
       });
 
-      console.log(response.data);
-    } catch (error) {
-      console.log('Erro!');
+      toast.success('Você fez seu cadastro com sucesso!');
+      history.push('/login'); // redireciona para a página de login
+    } catch (err) {
+      const errors = get(err, 'response.data.errors', []);
+      console.log(errors);
+
+      errors.map((erro) => toast.error(erro));
     }
   }
 

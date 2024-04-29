@@ -16,13 +16,13 @@ export default createGlobalStyle`
   }
 
   body .Toastify .Toastify__toast-container .Toastify__toast--success {
-    background: ${colors.successColor};
-    color: #fff;
+    background: white;
+    color: ${colors.successColor};
   }
 
   body .Toastify .Toastify__toast-container .Toastify__toast--error {
-    background: ${colors.errorColor};
-    color: #fff;
+    background: white;
+    color: ${colors.primaryColor};
   }
 
   html , body , #root {
