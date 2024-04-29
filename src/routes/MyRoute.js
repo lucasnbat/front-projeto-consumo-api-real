@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+import { useSelector } from 'react-redux';
 /**
  * Component: Componente que será renderizado, analogo ao component do Route
- * isClosed: Indica se a rota é fechada ou não, ou seja, se precisa de autenticação
+ * isCIn = false;losed: Indica se a rota é fechada ou não, ou seja, se precisa de autenticação
  * isClosed foi criada por nós, não é um parâmetro padrão do Route
  * ...rest: Todos os outros parâmetros que o Route aceita
  */
@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 // por meio do contexto do react (provider que tem o store lá no App.js)
 
 export default function MyRoute({ component: Component, isClosed, ...rest }) {
-  const isLoggedIn = false;
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   // Se a rota é fechada e o usuário não está logado, redireciona para a página de login
   // passando o state com prevPath
@@ -23,7 +23,7 @@ export default function MyRoute({ component: Component, isClosed, ...rest }) {
   if (isClosed && !isLoggedIn) {
     return (
       <Redirect
-        to={{ pathname: 'login', state: { prevPath: rest.location.pathname } }}
+        to={{ pathname: '/login', state: { prevPath: rest.location.pathname } }}
       />
     );
   }
