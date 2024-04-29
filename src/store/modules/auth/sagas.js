@@ -11,7 +11,7 @@ import axios from '../../../services/axios';
 function* loginRequest({ payload }) {
   try {
     // const { email, password } = payload;
-    const response = yield call(axios.post, '192.168.100.122/tokens', payload);
+    const response = yield call(axios.post, 'http://192.168.100.122/tokens', payload);
     yield put(actions.loginSucess({ ...response.data }));
 
     toast.success('Você fez login');
