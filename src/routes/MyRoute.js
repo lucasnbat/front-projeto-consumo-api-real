@@ -13,6 +13,7 @@ export default function MyRoute({ component: Component, isClosed, ...rest }) {
   const isLoggedIn = false;
 
   // Se a rota é fechada e o usuário não está logado, redireciona para a página de login
+  // passando o state com prevPath
   // rest.location.pathname é a rota que o usuário tentou acessar e foi redirecionado
   // se passou do if, ou é pq está logado ou porque a rota não precisa de autenticação
   // então passa direto e renderiza o componente usando o <Route />

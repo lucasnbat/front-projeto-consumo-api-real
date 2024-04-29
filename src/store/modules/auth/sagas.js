@@ -2,12 +2,27 @@ import {
   call, put, takeLatest, all,
 } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
+import history from '../../../services/history';
 import * as actions from './actions';
 import * as types from '../types';
+import axios from '../../../services/axios';
 
 // função geradora = function*
 function* loginRequest({ payload }) {
-  yield console.log('SAGA', payload);
+  try {
+    // const { email, password } = payload;
+    const response = yield call(axios.post, '192.168.100.122/tokens', payload);
+    yield put(actions.loginSucess({ ...response.data }));
+
+    toast.success('Você fez login');
+
+    // definindo o token no header por padrão
+    axios.defaults.headers.Authorization = `Bearer ${response.data.token}`;
+    history.push(payload.prevPath);
+  } catch (error) {
+    toast.error('Usuário ou senha inválidos');
+    yield put(actions.loginFailure());
+  }
 }
 
 // all: permite escutar várias actions

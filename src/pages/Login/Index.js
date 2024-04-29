@@ -5,14 +5,18 @@ import { useDispatch } from 'react-redux';
 // elas tem um tipo, payload, igual o que vimos na rocketseat
 import { isEmail } from 'validator';
 import { toast } from 'react-toastify';
+import get from 'lodash';
 import { Container } from '../../styles/GlobalStyles';
 import { Form } from './styled';
 import * as actions from '../../store/modules/auth/actions';
 
-export default function Login() {
+export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const dispatch = useDispatch();
+
+  const prevPath = get(props, 'location.state.prevPath', '/');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +35,7 @@ export default function Login() {
 
     if (formErrors) return; // se não tem erro, vai disparar o dispatch
 
-    dispatch(actions.loginRequest({ email, password }));
+    dispatch(actions.loginRequest({ email, password, prevPath }));
   };
 
   return (
