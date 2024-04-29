@@ -31,5 +31,6 @@ module.exports = {
     'no-unused-vars': 0,
     'no-console': 0,
     'default-param-last': 0,
+    'react/jsx-no-bind': 0,
   },
 };

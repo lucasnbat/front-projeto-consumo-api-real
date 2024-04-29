@@ -9,8 +9,8 @@ import persistedReducers from './modules/reduxPersist';
 // retorna o novo estado
 // state é o estado inicial
 
-import rootReducer from './modules/rootReducer';
-import rootSaga from './modules/rootSaga';
+import rootReducer from './modules/rootReducer'; // importa os reducers responsaveis pelas ações
+import rootSaga from './modules/rootSaga'; // importa os sagas responsaveis por escutar e chamar as funções que passam os types e acionam os reducers
 
 // criando o middleware saga
 const sagaMiddleware = createSagaMiddleware();

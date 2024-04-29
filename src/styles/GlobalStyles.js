@@ -39,6 +39,10 @@ export default createGlobalStyle`
     font-weight: bold;
   }
 
+  button:hover {
+    filter: brightness(75%);
+  }
+
   a {
     text-decoration: none;
     color: ${colors.primaryColor};
@@ -50,7 +54,7 @@ export default createGlobalStyle`
 `;
 
 export const Container = styled.section`
-  max-width: 360px;
+  max-width: 530px;
   background: #fff;
   margin: 30px auto;
   padding: 30px;
