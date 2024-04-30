@@ -18,8 +18,14 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const id = useSelector((state) => console.log(state.auth.user.id));
-  const userStored = useSelector((state) => console.log(state.auth.user.nome));
+  const nomeStored = useSelector((state) => console.log(state.auth.user.nome));
   const emailStored = useSelector((state) => console.log(state.auth.user.email));
+
+  React.useEffect(() => {
+    if (!id) return;
+    setNome(nomeStored);
+    setEmail(emailStored);
+  }, []); // coloca vars aqui (id, nomeStored, etc)
 
   async function handleSubmit(e) {
     e.preventDefault();
