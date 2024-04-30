@@ -33,5 +33,6 @@ module.exports = {
     'default-param-last': 0,
     'react/jsx-no-bind': 0,
     'func-names': 0,
+    'react/jsx-no-useless-fragment': 0,
   },
 };

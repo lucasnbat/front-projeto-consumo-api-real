@@ -8,14 +8,18 @@ import { Link } from 'react-router-dom';
 import { Container } from '../../styles/GlobalStyles';
 import axios from '../../services/axios';
 import { AlunoContainer, ProfilePicture } from './styled';
+import Loading from '../../components/Loading';
 
 export default function Alunos() {
   const [alunos, setAlunos] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function getData() {
+      setIsLoading(true);
       const response = await axios.get('http://192.168.100.122/alunos');
       setAlunos(response.data);
+      setIsLoading(false);
     }
 
     getData();
@@ -23,6 +27,8 @@ export default function Alunos() {
 
   return (
     <Container>
+      <Loading isLoading={isLoading} />
+
       <h1>Alunos</h1>
       <AlunoContainer>
         {alunos.map((aluno) => (
