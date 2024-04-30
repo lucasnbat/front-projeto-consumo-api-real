@@ -11,3 +11,4 @@
 * npm i redux-saga
 * npm i redux-persist
 * npm i lodash
+* npm i express-delay

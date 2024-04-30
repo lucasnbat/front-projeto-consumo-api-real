@@ -28,6 +28,7 @@ export default function (state = initialState, action) {
     case types.LOGIN_SUCESS: {
       const newState = { ...state };
       newState.isLoggedIn = true;
+      // acessa a action loginSucess, acessa o payload e pega o token e o user
       newState.token = action.payload.token;
       newState.user = action.payload.user;
       return newState;
