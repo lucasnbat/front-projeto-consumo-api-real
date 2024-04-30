@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // esse é o cara que dispara as ações
 // as ações mandam o que vai ser feito de alteração
 // elas tem um tipo, payload, igual o que vimos na rocketseat
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
 import { get } from 'lodash';
@@ -16,6 +17,9 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const id = useSelector((state) => console.log(state.auth.user.id));
+  const userStored = useSelector((state) => console.log(state.auth.user.nome));
+  const emailStored = useSelector((state) => console.log(state.auth.user.email));
 
   async function handleSubmit(e) {
     e.preventDefault();
