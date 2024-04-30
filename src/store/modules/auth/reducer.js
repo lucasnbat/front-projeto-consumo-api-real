@@ -31,12 +31,19 @@ export default function (state = initialState, action) {
       // acessa a action loginSucess, acessa o payload e pega o token e o user
       newState.token = action.payload.token;
       newState.user = action.payload.user;
+      newState.isLoading = false;
       return newState;
     }
 
     case types.LOGIN_FAILURE: {
       const newState = { ...initialState };
       return initialState; // volta para o estado inicial
+    }
+
+    case types.LOGIN_REQUEST: {
+      const newState = { ...initialState };
+      newState.isLoading = true; // isso permite você disparar o componente Loading
+      return newState;
     }
 
     default:

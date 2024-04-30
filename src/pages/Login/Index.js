@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // esse é o cara que dispara as ações
 // as ações mandam o que vai ser feito de alteração
 // elas tem um tipo, payload, igual o que vimos na rocketseat
@@ -9,11 +9,14 @@ import get from 'lodash';
 import { Container } from '../../styles/GlobalStyles';
 import { Form } from './styled';
 import * as actions from '../../store/modules/auth/actions';
+import Loading from '../../components/Loading';
 
 export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // auth é somente um dos modulos do estado
+  const isLoading = useSelector((state) => state.auth.isLoading);
   const dispatch = useDispatch();
 
   const prevPath = get(props, 'location.state.prevPath', '/');
@@ -40,6 +43,8 @@ export default function Login(props) {
 
   return (
     <Container>
+      <Loading isLoading={isLoading} />
+
       <h1>Login</h1>
 
       <Form onSubmit={handleSubmit}>
