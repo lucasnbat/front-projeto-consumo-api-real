@@ -12,7 +12,7 @@ import axios from '../../../services/axios';
 // payload = dados que o usuário enviou (email, senha, prevPath)
 function* loginRequest({ payload }) {
   try {
-    const response = yield call(axios.post, 'http://192.168.100.122/tokens', payload);
+    const response = yield call(axios.post, 'http://192.168.100.192/tokens', payload);
     yield put(actions.loginSucess({ ...response.data })); // volta o token gerado para o user
 
     toast.success('Você fez login');

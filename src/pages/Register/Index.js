@@ -17,15 +17,16 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const id = useSelector((state) => console.log(state.auth.user.id));
-  const nomeStored = useSelector((state) => console.log(state.auth.user.nome));
-  const emailStored = useSelector((state) => console.log(state.auth.user.email));
+  const id = useSelector((state) => (state.auth.user.id));
+  const nomeStored = useSelector((state) => (state.auth.user.nome));
+  const emailStored = useSelector((state) => (state.auth.user.email));
 
   React.useEffect(() => {
     if (!id) return;
+
     setNome(nomeStored);
     setEmail(emailStored);
-  }, []); // coloca vars aqui (id, nomeStored, etc)
+  }, [emailStored, id, nomeStored]); // coloca vars aqui (id, nomeStored, etc)
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -52,7 +53,7 @@ export default function Register() {
     setIsLoading(true);
 
     try {
-      await axios.post('http://192.168.100.122/users', {
+      await axios.post('http://192.168.100.192/users', {
         nome,
         password,
         email,
