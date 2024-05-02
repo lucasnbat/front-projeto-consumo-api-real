@@ -51,7 +51,7 @@ export default function Register() {
 
     // coloquei uma função qualquer aqui
     dispatch(actions.registerRequest({
-      nome, email, password,
+      nome, email, password, id,
     }));
 
     // setIsLoading(true);
@@ -77,6 +77,7 @@ export default function Register() {
 
   return (
     <Container>
+
       <Loading isLoading={isLoading} />
 
       <h1>{id ? 'Editar meus dados' : 'Crie sua conta'}</h1>

@@ -34,16 +34,27 @@ function persistRehydrate({ payload }) {
 }
 
 function* registerRequest({ payload }) {
-  const { nome, email, password } = payload;
+  const {
+    nome, email, password, id,
+  } = payload;
   try {
-    yield call(axios.put, 'http://192.168.100.192/users', {
-      email,
-      nome,
-      password: password || undefined, // se o usuário atualizar senha, ok, se não, não
-    });
-    toast.success('Conta alterada com sucesso!');
-
-    yield put(actions.registerSucess({ nome, email, password }));
+    if (id) {
+      yield call(axios.put, 'http://192.168.100.192/users', {
+        email,
+        nome,
+        password: password || undefined, // se o usuário atualizar senha, ok, se não, não
+      });
+      toast.success('Conta alterada com sucesso!');
+      yield put(actions.registerUpdatedSucess({ nome, email, password }));
+    } else {
+      yield call(axios.post, 'http://192.168.100.192/users', {
+        email,
+        nome,
+        password, // se o usuário atualizar senha, ok, se não, não
+      });
+      toast.success('Conta criada com sucesso!');
+      yield put(actions.registerCreatedSucess({ nome, email, password }));
+    }
   } catch (e) {
     const errors = get(e, 'response.data.errors', []);
     const status = get(e, 'response.status', 0);
