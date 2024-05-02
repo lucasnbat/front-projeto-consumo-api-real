@@ -54,6 +54,7 @@ function* registerRequest({ payload }) {
       });
       toast.success('Conta criada com sucesso!');
       yield put(actions.registerCreatedSucess({ nome, email, password }));
+      history.push('/login');
     }
   } catch (e) {
     const errors = get(e, 'response.data.errors', []);
