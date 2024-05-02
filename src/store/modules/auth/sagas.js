@@ -33,10 +33,36 @@ function persistRehydrate({ payload }) {
   axios.defaults.headers.Authorization = `Bearer ${token}`;
 }
 
+function* registerRequest({ payload }) {
+  const { nome, email, password } = payload;
+  try {
+    yield call(axios.put, 'http://192.168.100.192/users', {
+      email,
+      nome,
+      password: password || undefined, // se o usuário atualizar senha, ok, se não, não
+    });
+    toast.success('Conta alterada com sucesso!');
+
+    yield put(actions.registerSucess({ nome, email, password }));
+  } catch (e) {
+    const errors = get(e, 'response.data.errors', []);
+    const status = get(e, 'response.status', 0);
+
+    if (errors.length > 0) {
+      errors.map((error) => toast.error(error));
+    } else {
+      toast.error('Erro desconhecido');
+    }
+
+    yield put(actions.registerFailure());
+  }
+}
+
 // all: permite escutar várias actions
 // takeLatest: permite que a última requisição seja a que vai ser executada
 // como segundo parametro eu coloco a função que vai ser executada
 export default all([
   takeLatest(types.LOGIN_REQUEST, loginRequest),
   takeLatest(types.PERSIST_REHYDRATE, persistRehydrate),
+  takeLatest(types.REGISTER_REQUEST, registerRequest),
 ]);

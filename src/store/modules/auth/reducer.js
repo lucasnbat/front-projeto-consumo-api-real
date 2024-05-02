@@ -41,8 +41,26 @@ export default function (state = initialState, action) {
     }
 
     case types.LOGIN_REQUEST: {
-      const newState = { ...initialState };
+      const newState = { ...state };
       newState.isLoading = true; // isso permite você disparar o componente Loading
+      return newState;
+    }
+
+    case types.REGISTER_REQUEST: {
+      const newState = { ...state };
+      newState.isLoading = true;
+      return newState;
+    }
+
+    case types.REGISTER_SUCESS: {
+      const newState = { ...state };
+      newState.isLoading = false;
+      return newState;
+    }
+
+    case types.REGISTER_FAILURE: {
+      const newState = { ...state };
+      newState.isLoading = false;
       return newState;
     }
 

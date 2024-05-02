@@ -21,7 +21,7 @@ export default function Register() {
   const emailStored = useSelector((state) => (state.auth.user.email));
 
   React.useEffect(() => {
-    if (!id) return;
+    if (!id) return; // se não tem id, passa dessa função
 
     setNome(nomeStored);
     setEmail(emailStored);
@@ -50,7 +50,9 @@ export default function Register() {
     if (formErrors) return;
 
     // coloquei uma função qualquer aqui
-    dispatch(actions.loginSucess());
+    dispatch(actions.registerRequest({
+      nome, email, password,
+    }));
 
     // setIsLoading(true);
 
