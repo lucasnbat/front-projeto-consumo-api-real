@@ -34,3 +34,10 @@ export function loginRequest(payload) {
     payload,
   };
 }
+
+export function registerRequest(payload) {
+  return {
+    type: types.LOGIN_REQUEST,
+    payload,
+  };
+}
