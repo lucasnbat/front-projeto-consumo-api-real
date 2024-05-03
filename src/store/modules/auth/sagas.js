@@ -12,7 +12,7 @@ import axios from '../../../services/axios';
 // payload = dados que o usuário enviou (email, senha, prevPath)
 function* loginRequest({ payload }) {
   try {
-    const response = yield call(axios.post, 'http://192.168.100.192/tokens', payload);
+    const response = yield call(axios.post, 'http://192.168.100.224/tokens', payload);
     yield put(actions.loginSucess({ ...response.data })); // volta o token gerado para o user
 
     toast.success('Você fez login');
@@ -39,7 +39,7 @@ function* registerRequest({ payload }) {
   } = payload;
   try {
     if (id) {
-      yield call(axios.put, 'http://192.168.100.192/users', {
+      yield call(axios.put, 'http://192.168.100.224/users', {
         email,
         nome,
         password: password || undefined, // se o usuário atualizar senha, ok, se não, não
@@ -47,7 +47,7 @@ function* registerRequest({ payload }) {
       toast.success('Conta alterada com sucesso!');
       yield put(actions.registerUpdatedSucess({ nome, email, password }));
     } else {
-      yield call(axios.post, 'http://192.168.100.192/users', {
+      yield call(axios.post, 'http://192.168.100.224/users', {
         email,
         nome,
         password, // se o usuário atualizar senha, ok, se não, não
