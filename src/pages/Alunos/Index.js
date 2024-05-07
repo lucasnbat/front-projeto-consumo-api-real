@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 // esse é o cara que dispara as ações
 // as ações mandam o que vai ser feito de alteração
 // elas tem um tipo, payload, igual o que vimos na rocketseat
-import { FaEdit, FaUserCircle, FaWindowClose } from 'react-icons/fa';
+import {
+  FaEdit, FaExclamation, FaExclamationCircle, FaUserCircle, FaWindowClose,
+} from 'react-icons/fa';
 import get from 'lodash';
 import { Link } from 'react-router-dom';
 import { Container } from '../../styles/GlobalStyles';
@@ -24,6 +26,13 @@ export default function Alunos() {
 
     getData();
   }, []);
+
+  const handleDeleteAsk = (e) => {
+    e.preventDefault();
+    const exclamation = e.target.nextSibling;
+    exclamation.setAtributte('display', 'block');
+    e.currentTarget.remove();
+  };
 
   return (
     <Container>
@@ -48,9 +57,11 @@ export default function Alunos() {
               <FaEdit size={16} />
             </Link>
 
-            <Link to={`/aluno/${aluno.id}/delete`}>
+            <Link onClick={handleDeleteAsk} to={`/aluno/${aluno.id}/delete`}>
               <FaWindowClose size={16} />
             </Link>
+
+            <FaExclamationCircle size={16} display="none" cursor="pointer" />
           </div>
         ))}
       </AlunoContainer>
