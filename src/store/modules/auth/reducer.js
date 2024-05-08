@@ -1,4 +1,5 @@
 import * as types from '../types';
+import axios from '../../../services/axios';
 /**
  * A lógica antes envolvia:
  * 1. arquivo index do Store contendo o reducer com o switch
@@ -36,8 +37,10 @@ export default function (state = initialState, action) {
     }
 
     case types.LOGIN_FAILURE: {
+      delete axios.defaults.headers.Authorization;
+
       const newState = { ...initialState };
-      return initialState; // volta para o estado inicial
+      return newState; // volta para o estado inicial
     }
 
     case types.LOGIN_REQUEST: {
