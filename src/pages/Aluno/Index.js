@@ -108,7 +108,7 @@ export default function Aluno({ match }) {
         });
         toast.success('Aluno(a) editado(a) com sucesso!');
       } else {
-        await axios.post('http://192.168.100.224/alunos/', {
+        const { data } = await axios.post('http://192.168.100.224/alunos/', {
           nome,
           sobrenome,
           email,
@@ -117,6 +117,7 @@ export default function Aluno({ match }) {
           altura,
         });
         toast.success('Aluno(a) criado(a) com sucesso!');
+        history.push(`/aluno/${data.id}/edit/`);
       }
     } catch (err) {
       const status = get(err, 'response.status', 0);
